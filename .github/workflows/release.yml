@@ -21,7 +21,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: yarn instal --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - name: Test with Coverage
         run: yarn test
