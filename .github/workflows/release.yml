@@ -36,7 +36,12 @@ jobs:
           cat > dist/package.json <<'EOF'
           {
             "name": "vue-select",
-            "version": "$version"
+            "version": "$version",
+            "main": "vue-select.js",
+            "repository": {
+              "type": "git",
+              "url": "https://github.com/ck-al/vue-select.git"
+            },
           }
           EOF
 
