@@ -30,6 +30,16 @@ jobs:
       - name: Build project
         run: yarn build
 
+      - name: Create dist package.json
+        run: |
+          version="$(printf '%s' "${{ github.ref_name }}" | sed 's/^[^0-9]*//')"
+          cat > dist/package.json <<'EOF'
+          {
+            "name": "vue-select",
+            "version": "$version"
+          }
+          EOF
+
       - name: Zip and Tar distribution
         run: |
           tar -czf "${{ github.ref_name }}.tar.gz" -C dist .
