@@ -30,10 +30,17 @@ jobs:
       - name: Build project
         run: yarn build
 
+      - name: Zip and Tar distribution
+        run: |
+          tar -czf "${{ github.ref_name }}.tar.gz" -C dist .
+          zip -r "${{ github.ref_name }}.zip" dist
+
       - name: Create Release and Upload Artifact
         uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
           files: |
             dist/*
+            ${{ github.ref_name }}.tar.gz
+            ${{ github.ref_name }}.zip
           token: ${{ secrets.RELEASE_TOKEN }}
