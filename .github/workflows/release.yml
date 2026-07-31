@@ -9,6 +9,8 @@ on:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+    environment:
+      name: release
 
     steps:
       - name: Checkout repository
@@ -34,4 +36,4 @@ jobs:
           files: |
             dist/*
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
