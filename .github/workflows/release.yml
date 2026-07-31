@@ -37,11 +37,7 @@ jobs:
           {
             "name": "vue-select",
             "version": "$version",
-            "main": "vue-select.js",
-            "repository": {
-              "type": "git",
-              "url": "https://github.com/ck-al/vue-select.git"
-            },
+            "main": "vue-select.js"
           }
           EOF
 
