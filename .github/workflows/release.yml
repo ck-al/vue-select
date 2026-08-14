@@ -34,14 +34,19 @@ jobs:
         run: |
           rm -f latest.tar.gz latest.zip
 
-          tar \
-            --exclude='./.git' \
-            --exclude='./node_modules' \
-            -czf "$RUNNER_TEMP/latest.tar.gz" .
+          mapfile -d '' archive_entries < <(
+            find . \
+              -mindepth 1 \
+              -maxdepth 1 \
+              ! -name '.git' \
+              ! -name 'node_modules' \
+              ! -name 'latest.tar.gz' \
+              ! -name 'latest.zip' \
+              -printf '%P\0'
+          )
 
-          zip -r "$RUNNER_TEMP/latest.zip" . \
-            -x './.git/*' \
-            -x './node_modules/*'
+          tar -czf "$RUNNER_TEMP/latest.tar.gz" -- "${archive_entries[@]}"
+          zip -r "$RUNNER_TEMP/latest.zip" -- "${archive_entries[@]}"
 
           mv "$RUNNER_TEMP/latest.tar.gz" latest.tar.gz
           mv "$RUNNER_TEMP/latest.zip" latest.zip
