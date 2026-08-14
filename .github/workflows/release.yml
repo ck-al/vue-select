@@ -52,8 +52,8 @@ jobs:
 
           cp "$RUNNER_TEMP/latest.tar.gz" latest.tar.gz
           cp "$RUNNER_TEMP/latest.tar.gz" "$RELEASE_TAG.tar.gz"
-          mv "$RUNNER_TEMP/latest.zip" latest.zip
-          mv "$RUNNER_TEMP/latest.zip" "$RELEASE_TAG.zip"
+          cp "$RUNNER_TEMP/latest.zip" latest.zip
+          cp "$RUNNER_TEMP/latest.zip" "$RELEASE_TAG.zip"
 
       - name: Create Release and Upload Artifact
         uses: softprops/action-gh-release@v2
