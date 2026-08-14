@@ -30,21 +30,10 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: Create dist package.json
-        run: |
-          version="$(printf '%s' "${{ github.ref_name }}" | sed 's/^[^0-9]*//')"
-          cat > dist/package.json <<'EOF'
-          {
-            "name": "vue-select",
-            "version": "$version",
-            "main": "vue-select.js"
-          }
-          EOF
-
       - name: Zip and Tar distribution
         run: |
-          tar -czf "latest.tar.gz" -C dist .
-          zip -r "latest.zip" dist
+          tar -czf "latest.tar.gz" .
+          zip -r "latest.zip" .
 
       - name: Create Release and Upload Artifact
         uses: softprops/action-gh-release@v2
