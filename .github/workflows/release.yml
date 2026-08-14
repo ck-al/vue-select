@@ -62,5 +62,7 @@ jobs:
           files: |
             dist/*
             latest.tar.gz
+            "$RELEASE_TAG.tar.gz"
             latest.zip
+            "$RELEASE_TAG.zip"
           token: ${{ secrets.RELEASE_TOKEN }}
