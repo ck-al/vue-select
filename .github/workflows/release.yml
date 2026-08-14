@@ -30,10 +30,20 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: Zip and Tar distribution
+      - name: Archive entire project
         run: |
-          tar -czf "latest.tar.gz" .
-          zip -r "latest.zip" .
+          tar \
+            --exclude='./.git' \
+            --exclude='./node_modules' \
+            --exclude='./latest.tar.gz' \
+            --exclude='./latest.zip' \
+            -czf latest.tar.gz .
+
+          zip -r latest.zip . \
+            -x './.git/*' \
+            -x './node_modules/*' \
+            -x './latest.tar.gz' \
+            -x './latest.zip'
 
       - name: Create Release and Upload Artifact
         uses: softprops/action-gh-release@v2
